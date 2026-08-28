@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/banner.png" alt="Estoque-Console" width="100%">
+  <img src="img/banner.png" alt="Sistema-estoque-completo" width="100%">
 </p>
 
 # Sistema de Estoque — Completo
