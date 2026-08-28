@@ -139,7 +139,7 @@ Estoque-Sistema-Completo/
 
 ```bash
 git clone https://github.com/nahhay/Sistema-estoque-completo.git
-cd Estoque-Sistema-Completo
+cd Sistema-estoque-completo
 ```
 
 ### 2. Configure o PostgreSQL
