@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="img/banner.png" alt="Estoque-Console" width="100%">
+</p>
+
 # Sistema de Estoque — Completo
 
 Sistema de gerenciamento e conferência de estoque desenvolvido em **Java 17**, com API REST, PostgreSQL, Maven e dois painéis: Gerente e Funcionário.
