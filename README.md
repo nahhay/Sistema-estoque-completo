@@ -138,7 +138,7 @@ Estoque-Sistema-Completo/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/nahhay/Estoque-Sistema-Completo.git
+git clone https://github.com/nahhay/Sistema-estoque-completo.git
 cd Estoque-Sistema-Completo
 ```
 
