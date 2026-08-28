@@ -1,0 +1,22 @@
+# Build
+target/
+*.class
+
+# Configuração local com credenciais reais — versione apenas config.properties.example
+src/main/resources/config.properties
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Histórico de edição de IDE (ex: extensão "Local History")
+.history/
+
+# SO
+.DS_Store
+Thumbs.db

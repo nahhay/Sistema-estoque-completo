@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Estoque — Painel do Funcionário</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="funcionario.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="header">
+        <div class="header-content">
+          <h1>Sistema de Estoque</h1>
+          <span class="badge badge-funcionario">Painel do Funcionário</span>
+        </div>
+        <div class="status-indicator">
+          <a href="../index.html" class="link-painel">Painel do Gerente ↗</a>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="estoque">Estoque</button>
+        <button class="tab" data-tab="reposicoes">Reposições</button>
+        <button class="tab" data-tab="conferencias">Conferências</button>
+        <button class="tab" data-tab="historico">Histórico</button>
+      </nav>
+
+      <main class="content">
+        <section id="tab-estoque" class="tab-content active">
+          <div class="card">
+            <div class="card-header">
+              <h2>Estoque</h2>
+              <button class="btn-refresh" onclick="consultarEstoque()">
+                ⟳ Consultar
+              </button>
+            </div>
+            <p class="hint-text">
+              Registre entradas e saídas de estoque, ou consulte a quantidade atual
+              de um produto em um ponto.
+            </p>
+            <div class="form-row">
+              <input type="number" id="estoqueProdutoId" placeholder="ID Produto" />
+              <input type="number" id="estoquePontoId" placeholder="ID Ponto" />
+              <input
+                type="number"
+                id="estoqueFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="estoqueQuantidade"
+                placeholder="Quantidade"
+              />
+            </div>
+            <div class="btn-group">
+              <button class="btn-success" onclick="registrarEntrada()">
+                Entrada
+              </button>
+              <button class="btn-danger" onclick="registrarSaida()">
+                Saída
+              </button>
+              <button class="btn-info" onclick="consultarEstoque()">
+                Consultar
+              </button>
+            </div>
+            <div id="resultadoEstoque" class="result-box"></div>
+          </div>
+        </section>
+
+        <section id="tab-reposicoes" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Reposições</h2>
+              <button class="btn-refresh" onclick="listarReposicoes()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <p class="hint-text">
+              Solicite uma reposição ou avance o status de uma reposição existente.
+            </p>
+            <div class="form-row">
+              <input
+                type="number"
+                id="reposicaoProdutoId"
+                placeholder="ID Produto"
+              />
+              <input type="number" id="reposicaoPontoId" placeholder="ID Ponto" />
+              <input
+                type="number"
+                id="reposicaoFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="reposicaoQuantidade"
+                placeholder="Quantidade"
+              />
+              <button class="btn-primary" onclick="solicitarReposicao()">
+                Solicitar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="reposicaoId"
+                placeholder="ID da Reposição"
+              />
+              <button class="btn-warning" onclick="separarReposicao()">
+                Separar
+              </button>
+              <button class="btn-info" onclick="conferirReposicao()">
+                Conferir
+              </button>
+              <button class="btn-success" onclick="entregarReposicao()">
+                Entregar
+              </button>
+              <button class="btn-danger" onclick="cancelarReposicao()">
+                Cancelar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Ponto</th>
+                    <th>Qtd</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                  </tr>
+                </thead>
+                <tbody id="listaReposicoes">
+                  <tr>
+                    <td colspan="6" class="empty-msg">Nenhuma reposição</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-conferencias" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Conferências</h2>
+              <button class="btn-refresh" onclick="listarConferencias()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <p class="hint-text">
+              Registre a conferência de estoque físico de um produto em um ponto.
+            </p>
+            <div class="form-row">
+              <input
+                type="number"
+                id="conferenciaProdutoId"
+                placeholder="ID Produto"
+              />
+              <input
+                type="number"
+                id="conferenciaPontoId"
+                placeholder="ID Ponto"
+              />
+              <input
+                type="number"
+                id="conferenciaFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="conferenciaQuantidadeFisica"
+                placeholder="Qtd. Física"
+              />
+              <button class="btn-primary" onclick="realizarConferencia()">
+                Realizar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Ponto</th>
+                    <th>Esperado</th>
+                    <th>Físico</th>
+                    <th>Divergência</th>
+                  </tr>
+                </thead>
+                <tbody id="listaConferencias">
+                  <tr>
+                    <td colspan="6" class="empty-msg">Nenhuma conferência</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-historico" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Histórico do Produto</h2>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="historicoProdutoId"
+                placeholder="ID Produto"
+              />
+              <input
+                type="number"
+                id="historicoPontoId"
+                placeholder="ID Ponto"
+              />
+              <button class="btn-info" onclick="verHistorico()">Buscar</button>
+            </div>
+            <div id="resultadoHistorico" class="result-box"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="customAlert" class="alert-overlay">
+      <div class="alert-box">
+        <p id="alertMessage">Mensagem</p>
+        <button onclick="fecharAlert()">OK</button>
+      </div>
+    </div>
+    <script src="funcionario.js"></script>
+  </body>
+</html>

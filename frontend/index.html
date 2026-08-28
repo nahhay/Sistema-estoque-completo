@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Estoque</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="header">
+        <div class="header-content">
+          <h1>Sistema de Estoque</h1>
+          <span class="badge">Painel do Gerente</span>
+        </div>
+        <div class="status-indicator">
+          <a href="funcionario/funcionario.html" style="margin-right: 16px; color: var(--primary); font-size: 14px; font-weight: 500; text-decoration: none;">Painel do Funcionário ↗</a>
+          <span class="dot connected"></span>
+          <span id="statusTexto">Conectado</span>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="produtos">Produtos</button>
+        <button class="tab" data-tab="funcionarios">Funcionários</button>
+        <button class="tab" data-tab="pontos">Pontos</button>
+        <button class="tab" data-tab="estoque">Estoque</button>
+        <button class="tab" data-tab="reposicoes">Reposições</button>
+        <button class="tab" data-tab="conferencias">Conferências</button>
+        <button class="tab" data-tab="movimentacoes">Movimentações</button>
+        <button class="tab" data-tab="historico">Histórico</button>
+      </nav>
+
+      <main class="content">
+        <section id="tab-produtos" class="tab-content active">
+          <div class="card">
+            <div class="card-header">
+              <h2>Produtos</h2>
+              <button class="btn-refresh" onclick="listarProdutos()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                id="produtoNome"
+                placeholder="Nome do produto..."
+              />
+              <button class="btn-primary" onclick="cadastrarProduto()">
+                Cadastrar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th style="width: 160px">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="listaProdutos">
+                  <tr>
+                    <td colspan="3" class="empty-msg">
+                      Nenhum produto cadastrado
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-funcionarios" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Funcionários</h2>
+              <button class="btn-refresh" onclick="listarFuncionarios()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                id="funcionarioNome"
+                placeholder="Nome do funcionário..."
+              />
+              <button class="btn-primary" onclick="cadastrarFuncionario()">
+                Cadastrar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th style="width: 160px">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="listaFuncionarios">
+                  <tr>
+                    <td colspan="3" class="empty-msg">
+                      Nenhum funcionário cadastrado
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-pontos" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Pontos</h2>
+              <button class="btn-refresh" onclick="listarPontos()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="text"
+                id="pontoNome"
+                placeholder="Nome do ponto..."
+              />
+              <button class="btn-primary" onclick="cadastrarPonto()">
+                Cadastrar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th style="width: 160px">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="listaPontos">
+                  <tr>
+                    <td colspan="3" class="empty-msg">
+                      Nenhum ponto cadastrado
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-estoque" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Estoque</h2>
+              <button class="btn-refresh" onclick="consultarEstoque()">
+                ⟳ Consultar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="estoqueProdutoId"
+                placeholder="ID Produto"
+              />
+              <input type="number" id="estoquePontoId" placeholder="ID Ponto" />
+              <input
+                type="number"
+                id="estoqueFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="estoqueQuantidade"
+                placeholder="Quantidade"
+              />
+            </div>
+            <div class="btn-group">
+              <button class="btn-success" onclick="registrarEntrada()">
+                Entrada
+              </button>
+              <button class="btn-danger" onclick="registrarSaida()">
+                Saída
+              </button>
+              <button class="btn-info" onclick="consultarEstoque()">
+                Consultar
+              </button>
+            </div>
+            <div id="resultadoEstoque" class="result-box"></div>
+          </div>
+        </section>
+
+        <section id="tab-reposicoes" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Reposições</h2>
+              <button class="btn-refresh" onclick="listarReposicoes()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="reposicaoProdutoId"
+                placeholder="ID Produto"
+              />
+              <input
+                type="number"
+                id="reposicaoPontoId"
+                placeholder="ID Ponto"
+              />
+              <input
+                type="number"
+                id="reposicaoFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="reposicaoQuantidade"
+                placeholder="Quantidade"
+              />
+              <button class="btn-primary" onclick="solicitarReposicao()">
+                Solicitar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="reposicaoId"
+                placeholder="ID da Reposição"
+              />
+              <button class="btn-warning" onclick="separarReposicao()">
+                Separar
+              </button>
+              <button class="btn-info" onclick="conferirReposicao()">
+                Conferir
+              </button>
+              <button class="btn-success" onclick="entregarReposicao()">
+                Entregar
+              </button>
+              <button class="btn-danger" onclick="cancelarReposicao()">
+                Cancelar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Ponto</th>
+                    <th>Qtd</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                  </tr>
+                </thead>
+                <tbody id="listaReposicoes">
+                  <tr>
+                    <td colspan="6" class="empty-msg">Nenhuma reposição</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-conferencias" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Conferências</h2>
+              <button class="btn-refresh" onclick="listarConferencias()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="conferenciaProdutoId"
+                placeholder="ID Produto"
+              />
+              <input
+                type="number"
+                id="conferenciaPontoId"
+                placeholder="ID Ponto"
+              />
+              <input
+                type="number"
+                id="conferenciaFuncionarioId"
+                placeholder="ID Funcionário"
+              />
+              <input
+                type="number"
+                id="conferenciaQuantidadeFisica"
+                placeholder="Qtd. Física"
+              />
+              <button class="btn-primary" onclick="realizarConferencia()">
+                Realizar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Ponto</th>
+                    <th>Esperado</th>
+                    <th>Físico</th>
+                    <th>Divergência</th>
+                  </tr>
+                </thead>
+                <tbody id="listaConferencias">
+                  <tr>
+                    <td colspan="6" class="empty-msg">Nenhuma conferência</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-movimentacoes" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Movimentações</h2>
+              <button class="btn-refresh" onclick="listarMovimentacoes()">
+                ⟳ Atualizar
+              </button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Ponto</th>
+                    <th>Funcionário</th>
+                    <th>Tipo</th>
+                    <th>Qtd</th>
+                  </tr>
+                </thead>
+                <tbody id="listaMovimentacoes">
+                  <tr>
+                    <td colspan="6" class="empty-msg">Nenhuma movimentação</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="tab-historico" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Histórico do Produto</h2>
+            </div>
+            <div class="form-row">
+              <input
+                type="number"
+                id="historicoProdutoId"
+                placeholder="ID Produto"
+              />
+              <input
+                type="number"
+                id="historicoPontoId"
+                placeholder="ID Ponto"
+              />
+              <button class="btn-info" onclick="verHistorico()">Buscar</button>
+            </div>
+            <div id="resultadoHistorico" class="result-box"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="customAlert" class="alert-overlay">
+      <div class="alert-box">
+        <p id="alertMessage">Mensagem</p>
+        <button onclick="fecharAlert()">OK</button>
+      </div>
+    </div>
+    <div id="modalEditar" class="alert-overlay">
+      <div class="alert-box" style="max-width: 420px; text-align: left">
+        <h3 style="margin-bottom: 16px; color: var(--gray-800)">Editar</h3>
+        <input type="hidden" id="editId" />
+        <input type="hidden" id="editTipo" />
+        <div class="form-row" style="flex-direction: column; gap: 8px">
+          <label
+            style="font-weight: 500; font-size: 14px; color: var(--gray-600)"
+            >Novo nome:</label
+          >
+          <input
+            type="text"
+            id="editNome"
+            placeholder="Digite o novo nome..."
+            style="width: 100%"
+          />
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            justify-content: flex-end;
+          "
+        >
+          <button
+            onclick="fecharModalEditar()"
+            style="
+              background: var(--gray-200);
+              color: var(--gray-700);
+              padding: 10px 20px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: 500;
+            "
+          >
+            Cancelar
+          </button>
+          <button
+            onclick="salvarEdicao()"
+            class="btn-primary"
+            style="padding: 10px 20px"
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

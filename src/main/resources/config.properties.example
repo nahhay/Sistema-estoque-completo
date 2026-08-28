@@ -1,0 +1,7 @@
+db.url=jdbc:postgresql://localhost:5432/estoque
+db.user=postgres
+db.password=troque_esta_senha
+
+db.pool.maxSize=10
+db.pool.minIdle=2
+db.pool.connectionTimeoutMs=30000
