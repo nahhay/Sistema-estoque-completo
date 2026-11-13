@@ -1,13 +1,3 @@
-<p align="center">
-  <img src="img/banner.png" alt="Sistema-estoque-completo" width="100%">
-</p>
-
-# Sistema de Estoque — Completo
-
-Sistema de gerenciamento e conferência de estoque desenvolvido em **Java 17**, com API REST, PostgreSQL, Maven e dois painéis: Gerente e Funcionário.
-
----
-
 ## Sobre o projeto
 
 O **Estoque-Sistema-Completo** é a terceira e última etapa de uma evolução em três repositórios:
